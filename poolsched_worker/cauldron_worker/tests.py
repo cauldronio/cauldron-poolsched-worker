@@ -124,6 +124,7 @@ class TestPoolSched(TestCase):
          * User C has two intentions (ready), and exhausted token
          * User D has no intentions
         """
+        self.intention_order = [IGHRaw]
 
         # Some users
         self.users = [User.objects.create(username=username)
@@ -161,7 +162,7 @@ class TestPoolSched(TestCase):
     def test_init(self, mock_skip_run):
         # logging.basicConfig(level=logging.DEBUG)
         # logging.getLogger().setLevel(logging.DEBUG)
-        worker = SchedWorker(run=True, finish=True)
+        worker = SchedWorker(run=True, finish=True, intention_order=self.intention_order)
         archived_IGHRaw = IGHRawArchived.objects.count()
         archived_jobs = ArchJob.objects.count()
         self.assertEqual(archived_IGHRaw, 3)
@@ -171,7 +172,7 @@ class TestPoolSched(TestCase):
     def test_new_job_manual(self, mock_skip):
         """Test new_job"""
 
-        worker = SchedWorker()
+        worker = SchedWorker(intention_order=self.intention_order)
         users = worker._get_random_user_ready(max=4)
         intentions = worker._get_intentions(users=users)
         self.assertEqual(len(intentions), 1)
@@ -182,7 +183,7 @@ class TestPoolSched(TestCase):
     def test_get_new_job(self, mock_skip):
         """Test new_job"""
         # logging.basicConfig(level=logging.DEBUG)
-        worker = SchedWorker()
+        worker = SchedWorker(intention_order=self.intention_order)
         job = worker.get_new_job(max_users=5)
         self.assertEqual(job.worker, worker.worker)
         intention = job.intention_set.first()
@@ -196,7 +197,7 @@ class TestPoolSched(TestCase):
 
         # Expected intentions ready (per user)
         expected_intentions = {'A': 2, 'B': 1, 'C': 0, 'D': 0, 'E': 0, 'F': 0}
-        worker = SchedWorker()
+        worker = SchedWorker(intention_order=self.intention_order)
         # Get all users
         users = User.objects.all()
         # Check all users, one user each loop
@@ -229,7 +230,7 @@ class TestPoolSched(TestCase):
 
         # Expected intentions ready (per user)
         exp_intentions = {'A': 2, 'B': 1, 'C': 0, 'D': 0, 'E': 0, 'F': 0}
-        worker = SchedWorker()
+        worker = SchedWorker(intention_order=self.intention_order)
         # Get all users
         users = User.objects.all()
         # Check for several max number of intentions
@@ -252,6 +253,6 @@ class TestPoolSched(TestCase):
     def test_init2(self, mock_fun):
         """When an intetion fails, it is archived as error"""
         #        logging.basicConfig(level=logging.DEBUG)
-        worker = SchedWorker(run=True, finish=True)
+        worker = SchedWorker(run=True, finish=True, intention_order=self.intention_order)
         # Run should run 5 times being interrupted, and 3 more (all intentions done)
         self.assertEqual(mock_fun.call_count, 8)
