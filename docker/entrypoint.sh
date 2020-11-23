@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd poolsched_worker
+
 function log_message {
   echo "["`date -u "+%Y-%m-%d %H:%M:%S UTC"`"]" $*
 }
