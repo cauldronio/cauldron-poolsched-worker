@@ -1,13 +1,33 @@
+import datetime
+
 from django.core.management.base import BaseCommand
+from django.contrib.auth import get_user_model
 from django.apps import apps
+from django.conf import settings
+from django.utils.timezone import now
 
 from poolsched import schedworker
+from cauldron_apps.poolsched_git.models import IGitAutoRefresh
+from cauldron_apps.poolsched_github.models import IGHRepoAutoRefresh, IGHIssueAutoRefresh, IGH2IssueAutoRefresh
+from cauldron_apps.poolsched_gitlab.models import IGLIssueAutoRefresh, IGLMergeAutoRefresh
+from cauldron_apps.poolsched_meetup.models import IMeetupAutoRefresh
+
+User = get_user_model()
 
 
 class Command(BaseCommand):
     help = 'Run the scheduler worker'
 
-    INTENTION_ORDER = [
+    AUTOREFRESH = [
+        'poolsched_git.IGitAutoRefresh',
+        'poolsched_github.IGHIssueAutoRefresh',
+        'poolsched_github.IGHRepoAutoRefresh',
+        'poolsched_github.IGH2IssueAutoRefresh',
+        'poolsched_gitlab.IGLIssueAutoRefresh',
+        'poolsched_gitlab.IGLMergeAutoRefresh',
+        'poolsched_meetup.IMeetupAutoRefresh'
+    ]
+    BASE_INTENTIONS = [
         'poolsched_github.IGHEnrich',
         'poolsched_gitlab.IGLEnrich',
         'poolsched_git.IGitEnrich',
@@ -18,7 +38,24 @@ class Command(BaseCommand):
         'poolsched_meetup.IMeetupRaw',
     ]
 
+    def _create_autorefresh_intentions(self):
+        next_autorefresh = now() + datetime.timedelta(hours=1)
+        models = [IGitAutoRefresh, IGHRepoAutoRefresh, IGHIssueAutoRefresh, IGH2IssueAutoRefresh,
+                  IGLIssueAutoRefresh, IGLMergeAutoRefresh, IMeetupAutoRefresh]
+        u, created = User.objects.get_or_create(username='admin_poolsched')
+        if created:
+            u.set_unusable_password()
+        for model in models:
+            try:
+                model.objects.get_or_create(defaults={'scheduled': next_autorefresh, 'user': u})
+            except model.MultipleObjectsReturned:
+                pass
+
     def handle(self, *args, **options):
-        # TODO: Define intention order in settings to be customizable for each worker
-        intention_order = [apps.get_model(intention) for intention in self.INTENTION_ORDER]
+        if settings.SORTINGHAT:
+            intentions = self.AUTOREFRESH + self.BASE_INTENTIONS
+            self._create_autorefresh_intentions()
+        else:
+            intentions = self.BASE_INTENTIONS
+        intention_order = [apps.get_model(intention) for intention in intentions]
         schedworker.SchedWorker(run=True, intention_order=intention_order)

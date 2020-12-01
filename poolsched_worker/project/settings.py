@@ -32,6 +32,12 @@ DB_PASSWORD = os.environ.get('DB_PASSWORD')
 DB_HOST = os.environ.get('DB_HOST')
 DB_PORT = os.environ.get('DB_PORT')
 
+SORTINGHAT = os.environ.get('SORTINGHAT', False) in (True, 'True', 'true')
+SORTINGHAT_HOST = os.environ.get('SORTINGHAT_HOST')
+SORTINGHAT_DATABASE = os.environ.get('SORTINGHAT_DATABASE')
+SORTINGHAT_USER = os.environ.get('SORTINGHAT_USER')
+SORTINGHAT_PASSWORD = os.environ.get('SORTINGHAT_PASSWORD')
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', ')z^&@havbcsr^x1t9fnlf@zl07y$&s1=6en94gf_s#898xy(ecjwl9gi$a66')
 
@@ -57,6 +63,7 @@ INSTALLED_APPS = [
     'cauldron_apps.poolsched_github',
     'cauldron_apps.poolsched_gitlab',
     'cauldron_apps.poolsched_meetup',
+    'cauldron_apps.poolsched_autorefresh'
 ]
 
 MIDDLEWARE = [
