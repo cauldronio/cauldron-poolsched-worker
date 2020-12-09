@@ -11,6 +11,7 @@ from cauldron_apps.poolsched_git.models import IGitAutoRefresh
 from cauldron_apps.poolsched_github.models import IGHRepoAutoRefresh, IGHIssueAutoRefresh, IGH2IssueAutoRefresh
 from cauldron_apps.poolsched_gitlab.models import IGLIssueAutoRefresh, IGLMergeAutoRefresh
 from cauldron_apps.poolsched_meetup.models import IMeetupAutoRefresh
+from cauldron_apps.poolsched_merge_identities.models import IMergeIdentities
 
 User = get_user_model()
 
@@ -25,7 +26,8 @@ class Command(BaseCommand):
         'poolsched_github.IGH2IssueAutoRefresh',
         'poolsched_gitlab.IGLIssueAutoRefresh',
         'poolsched_gitlab.IGLMergeAutoRefresh',
-        'poolsched_meetup.IMeetupAutoRefresh'
+        'poolsched_meetup.IMeetupAutoRefresh',
+        'poolsched_merge_identities.IMergeIdentities',
     ]
     BASE_INTENTIONS = [
         'poolsched_github.IGHEnrich',
@@ -41,7 +43,7 @@ class Command(BaseCommand):
     def _create_autorefresh_intentions(self):
         next_autorefresh = now() + datetime.timedelta(hours=1)
         models = [IGitAutoRefresh, IGHRepoAutoRefresh, IGHIssueAutoRefresh, IGH2IssueAutoRefresh,
-                  IGLIssueAutoRefresh, IGLMergeAutoRefresh, IMeetupAutoRefresh]
+                  IGLIssueAutoRefresh, IGLMergeAutoRefresh, IMeetupAutoRefresh, IMergeIdentities]
         u, created = User.objects.get_or_create(username='admin_poolsched')
         if created:
             u.set_unusable_password()
