@@ -30,6 +30,8 @@ class Command(BaseCommand):
         'poolsched_merge_identities.IMergeIdentities',
     ]
     BASE_INTENTIONS = [
+        'cauldron.IAddGHOwner',
+        'cauldron.IAddGLOwner',
         'poolsched_github.IGHEnrich',
         'poolsched_gitlab.IGLEnrich',
         'poolsched_git.IGitEnrich',
