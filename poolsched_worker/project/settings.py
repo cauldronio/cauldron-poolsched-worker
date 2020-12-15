@@ -21,6 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 GIT_REPOS = os.environ.get('GIT_REPOS')
 JOB_LOGS = os.environ.get('JOB_LOGS')
+STATIC_FILES_DIR = '/static_files/'
 
 ES_IN_HOST = os.environ.get('ELASTIC_HOST')
 ES_IN_PORT = os.environ.get('ELASTIC_PORT')
@@ -37,6 +38,8 @@ SORTINGHAT_HOST = os.environ.get('SORTINGHAT_HOST')
 SORTINGHAT_DATABASE = os.environ.get('SORTINGHAT_DATABASE')
 SORTINGHAT_USER = os.environ.get('SORTINGHAT_USER')
 SORTINGHAT_PASSWORD = os.environ.get('SORTINGHAT_PASSWORD')
+
+JWT_KEY = os.environ.get('JWT_KEY')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', ')z^&@havbcsr^x1t9fnlf@zl07y$&s1=6en94gf_s#898xy(ecjwl9gi$a66')
@@ -65,6 +68,7 @@ INSTALLED_APPS = [
     'cauldron_apps.poolsched_meetup',
     'cauldron_apps.poolsched_autorefresh',
     'cauldron_apps.poolsched_merge_identities',
+    'cauldron_apps.poolsched_export',
 ]
 
 MIDDLEWARE = [

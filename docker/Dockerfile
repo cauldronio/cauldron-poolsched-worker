@@ -21,11 +21,14 @@ RUN pip install -q -r requirements.txt
 
 RUN mkdir -p /job_logs
 RUN mkdir -p /git_repositories
+RUN mkdir -p /static_files
 RUN chown grimoirelab /job_logs
 RUN chown grimoirelab /git_repositories
+RUN chown grimoirelab /static_files
 
 VOLUME ["/job_logs"]
 VOLUME ["/git_repositories"]
+VOLUME ["/static_files"]
 
 USER grimoirelab
 
