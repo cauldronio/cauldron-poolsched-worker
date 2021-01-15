@@ -3,6 +3,6 @@ mysqlclient
 django-model-utils>=4.0
 python-gitlab
 PyGithub>=1.51,<2.0
-cryptography>=2.7,<3
+cryptography>=3.2
 git+https://gitlab.com/cauldronio/cauldron-pool-scheduler.git
 git+https://gitlab.com/cauldronio/cauldron-common-apps.git
