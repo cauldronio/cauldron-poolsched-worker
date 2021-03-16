@@ -2,7 +2,7 @@
 # It is configured for getting tasks from a database and running them
 # Build this container from the root of the repository
 
-FROM cauldronio/grimoirelab:0.2.52-py3.7
+FROM cauldronio/grimoirelab:0.2.55-py3.7
 
 ENV CODE_WORKER /code
 
