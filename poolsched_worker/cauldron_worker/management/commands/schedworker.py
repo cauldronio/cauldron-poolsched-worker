@@ -38,10 +38,12 @@ class Command(BaseCommand):
         'poolsched_gitlab.IGLEnrich',
         'poolsched_git.IGitEnrich',
         'poolsched_meetup.IMeetupEnrich',
+        'poolsched_stackexchange.IStackExchangeEnrich',
         'poolsched_github.IGHRaw',
         'poolsched_gitlab.IGLRaw',
         'poolsched_git.IGitRaw',
         'poolsched_meetup.IMeetupRaw',
+        'poolsched_stackexchange.IStackExchangeRaw',
     ]
 
     def _create_autorefresh_intentions(self):
