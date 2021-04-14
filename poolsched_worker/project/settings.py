@@ -41,6 +41,12 @@ SORTINGHAT_PASSWORD = os.environ.get('SORTINGHAT_PASSWORD')
 
 JWT_KEY = os.environ.get('JWT_KEY')
 
+# Twitter Oauth keys
+TWITTER_CLIENT_ID = os.environ.get('TWITTER_CLIENT_ID')
+TWITTER_CLIENT_SECRET = os.environ.get('TWITTER_CLIENT_SECRET')
+TWITTER_ACCESS_TOKEN = os.environ.get('TWITTER_ACCESS_TOKEN')
+TWITTER_ACCESS_TOKEN_SECRET = os.environ.get('TWITTER_ACCESS_TOKEN_SECRET')
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', ')z^&@havbcsr^x1t9fnlf@zl07y$&s1=6en94gf_s#898xy(ecjwl9gi$a66')
 
@@ -67,6 +73,7 @@ INSTALLED_APPS = [
     'cauldron_apps.poolsched_gitlab',
     'cauldron_apps.poolsched_meetup',
     'cauldron_apps.poolsched_stackexchange',
+    'cauldron_apps.poolsched_twitter',
     'cauldron_apps.poolsched_autorefresh',
     'cauldron_apps.poolsched_merge_identities',
     'cauldron_apps.poolsched_export',

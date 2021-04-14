@@ -30,6 +30,7 @@ class Command(BaseCommand):
         'poolsched_merge_identities.IMergeIdentities',
     ]
     BASE_INTENTIONS = [
+        'poolsched_twitter.ITwitterNotify',
         'cauldron.IAddGHOwner',
         'cauldron.IAddGLOwner',
         'cauldron_actions.IRefreshActions',
