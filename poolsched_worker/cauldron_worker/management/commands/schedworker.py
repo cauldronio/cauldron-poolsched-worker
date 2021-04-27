@@ -34,7 +34,7 @@ class Command(BaseCommand):
         'cauldron.IAddGHOwner',
         'cauldron.IAddGLOwner',
         'cauldron_actions.IRefreshActions',
-        'poolsched_export.IExportGitCSV',
+        'poolsched_export.IExportCSV',
         'poolsched_github.IGHEnrich',
         'poolsched_gitlab.IGLEnrich',
         'poolsched_git.IGitEnrich',
