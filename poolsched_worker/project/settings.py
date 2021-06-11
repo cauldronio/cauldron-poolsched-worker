@@ -27,6 +27,10 @@ ES_IN_HOST = os.environ.get('ELASTIC_HOST')
 ES_IN_PORT = os.environ.get('ELASTIC_PORT')
 ES_ADMIN_PASSWORD = os.environ.get('ELASTIC_PASS')
 
+KIB_IN_HOST = os.environ.get('KIBANA_HOST')
+KIB_IN_PORT = os.environ.get('KIBANA_PORT')
+KIB_PATH = os.environ.get('KIBANA_PATH')
+
 DB_NAME = os.environ.get('DB_NAME')
 DB_USER = os.environ.get('DB_USER')
 DB_PASSWORD = os.environ.get('DB_PASSWORD')

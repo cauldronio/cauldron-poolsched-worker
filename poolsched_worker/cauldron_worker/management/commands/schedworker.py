@@ -35,6 +35,7 @@ class Command(BaseCommand):
         'cauldron.IAddGLOwner',
         'cauldron_actions.IRefreshActions',
         'poolsched_export.IExportCSV',
+        'poolsched_export.IReportKbn',
         'poolsched_github.IGHEnrich',
         'poolsched_gitlab.IGLEnrich',
         'poolsched_git.IGitEnrich',
@@ -51,7 +52,7 @@ class Command(BaseCommand):
         next_autorefresh = now() + datetime.timedelta(hours=1)
         models = [IGitAutoRefresh, IGHRepoAutoRefresh, IGHIssueAutoRefresh, IGH2IssueAutoRefresh,
                   IGLIssueAutoRefresh, IGLMergeAutoRefresh, IMeetupAutoRefresh, IMergeIdentities]
-        u, created = User.objects.get_or_create(username='admin_poolsched')
+        u, created = User.objects.get_or_create(username='admin_poolsched', defaults={'first_name': 'admin_poolsched'})
         if created:
             u.set_unusable_password()
         for model in models:
