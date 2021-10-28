@@ -36,6 +36,7 @@ class Command(BaseCommand):
         'cauldron_actions.IRefreshActions',
         'poolsched_export.IExportCSV',
         'poolsched_export.IReportKbn',
+        'poolsched_export.ICommitsByMonth',
         'poolsched_github.IGHEnrich',
         'poolsched_gitlab.IGLEnrich',
         'poolsched_git.IGitEnrich',
