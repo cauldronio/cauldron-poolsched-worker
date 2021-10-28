@@ -31,6 +31,7 @@ class Command(BaseCommand):
     ]
     BASE_INTENTIONS = [
         'poolsched_twitter.ITwitterNotify',
+        'poolsched_sbom.IParseSPDX',
         'cauldron.IAddGHOwner',
         'cauldron.IAddGLOwner',
         'cauldron_actions.IRefreshActions',

@@ -20,13 +20,16 @@ RUN chmod +x /entrypoint.sh
 RUN pip install -q -r requirements.txt
 
 RUN mkdir -p /job_logs
+RUN mkdir -p /spdx_files
 RUN mkdir -p /git_repositories
 RUN mkdir -p /static_files
 RUN chown grimoirelab /job_logs
+RUN chown grimoirelab /spdx_files
 RUN chown grimoirelab /git_repositories
 RUN chown grimoirelab /static_files
 
 VOLUME ["/job_logs"]
+VOLUME ["/spdx_files"]
 VOLUME ["/git_repositories"]
 VOLUME ["/static_files"]
 

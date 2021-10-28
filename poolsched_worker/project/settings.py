@@ -21,6 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 GIT_REPOS = os.environ.get('GIT_REPOS')
 JOB_LOGS = os.environ.get('JOB_LOGS')
+SPDX_FILES_PATH = os.environ.get('SPDX_FILES')
 STATIC_FILES_DIR = '/static_files/'
 
 ES_IN_HOST = os.environ.get('ELASTIC_HOST')
@@ -82,6 +83,7 @@ INSTALLED_APPS = [
     'cauldron_apps.poolsched_merge_identities',
     'cauldron_apps.poolsched_export',
     'cauldron_apps.cauldron_actions',
+    'cauldron_apps.poolsched_sbom',
 ]
 
 MIDDLEWARE = [
